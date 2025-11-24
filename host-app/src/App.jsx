@@ -1,25 +1,29 @@
 import React, { lazy, Suspense } from 'react';
 
-const RemoteHeader = lazy(() => import('remoteApp/Header'));
+const Header = lazy(() => import('remoteHeader/Header'));
+const Card = lazy(() => import('remoteCard/Card'));
 
 function App() {
   return (
-    <div>
+    <div style={{ fontFamily: 'Arial' }}>
       <Suspense fallback={<div>Cargando Header...</div>}>
-        <RemoteHeader />
+        <Header />
       </Suspense>
 
-      <div style={{ padding: '20px', textAlign: 'center', fontFamily: 'sans-serif' }}>
-        <h1>Bienvenido a la Aplicación Principal (Host)</h1>
-        <p>
-          El contenido de arriba (el header púrpura) no existe en este proyecto.
-        </p>
-        <p>
-          Fue cargado dinámicamente en tiempo de ejecución desde 
-          <code>localhost:5001</code>.
-        </p>
+      <div style={{ padding: '20px' }}>
+        <h1>🔵 Aplicación Host (Main)</h1>
+        <p>Esta aplicación orquesta los microfrontends.</p>
+        
+        <hr />
+        
+        <h3>Productos Recomendados:</h3>
+        <div style={{ display: 'flex', gap: '20px' }}>
+          <Suspense fallback={<div>Cargando Tarjeta...</div>}>
+            <Card />
+            <Card /> 
+          </Suspense>
+        </div>
       </div>
-
     </div>
   );
 }

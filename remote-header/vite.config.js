@@ -6,15 +6,15 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: 'hostApp',
-      remotes: {
-        remoteHeader: 'http://localhost:5001/assets/remoteEntry.js',
-        remoteCard: 'http://localhost:5002/assets/remoteEntry.js',
+      name: 'remoteHeader',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Header': './src/Header.jsx',
       },
       shared: ['react', 'react-dom'],
     }),
   ],
-  server: { port: 5000 },
+  server: { port: 5001 }, 
   build: {
     modulePreload: false,
     target: 'esnext',
